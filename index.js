@@ -1,20 +1,18 @@
 // event listener for Buttons
-var drumButtons = document.querySelectorAll(".drum").length;
-for (i = 0; i < drumButtons; i++) {
+document.querySelectorAll(".drum").forEach(drum => drum.addEventListener('click', buttonEventHandler));
 
-    document.querySelectorAll(".drum")[i].addEventListener("click", function () {
-
-        audio(this.innerHTML);
-        buttonAnimation(this.innerHTML);
-    });
-
-}
 
 //Keypress event listener
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", (event)=> {
     audio(event.key);
     buttonAnimation(event.key);
 })
+
+
+function buttonEventHandler() {
+    audio(this.innerHTML);
+    buttonAnimation(this.innerHTML);
+}
 
 // Audios for the buttons and Keypress
 function audio(buttonInnerHTML) {
@@ -61,11 +59,11 @@ function audio(buttonInnerHTML) {
     }
 }
 
-function buttonAnimation(currentKey){
-var activeButton = document.querySelector("." + currentKey);
-activeButton.classList.add("pressed");
+function buttonAnimation(currentKey) {
+    const activeButton = document.querySelector(`.${currentKey}`);
+    activeButton.classList.add("pressed");
 
-setTimeout(function() { 
-    activeButton.classList.remove("pressed");
-}, 100);
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 100);
 }
